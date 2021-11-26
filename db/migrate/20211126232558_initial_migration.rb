@@ -1,4 +1,4 @@
-class CreateAnimations < ActiveRecord::Migration[6.1]
+class InitialMigration < ActiveRecord::Migration[6.1]
   def change
     create_table :animations do |t|
       t.string :name
