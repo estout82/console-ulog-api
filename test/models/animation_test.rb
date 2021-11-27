@@ -36,7 +36,11 @@ class AnimationTest < ActiveSupport::TestCase
     test "secret is hashed" do
         animation = new_valid_animation
         assert animation.save
-        assert_not_equal animation.secret, "1234"
+        assert_not_equal animation.secret_digest, "1234"
+    end
+
+    test "secret comparisson should work" do
+        # use the has_secure_password to compare secret to 1234
     end
 
     test "frames relationship works" do

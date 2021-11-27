@@ -1,4 +1,4 @@
 one:
   name: Test
   slug: test
-  secret: 1234
+  secret_digest: $2a$12$oNP1c1gbQNxTN2hnWlxr8ePMBFZUESNluJ09EmgVgnpZOz6m9DnYW

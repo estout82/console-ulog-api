@@ -1,4 +1,15 @@
+
 class Api::AnimationsController < ApplicationController
+    def test
+        animation = Animation.find_by(slug: "consoleulog")
+        render json: { result: animation.authenticate_secret("11234") }
+    end
+
+    def index
+        @animations = Animation.all
+        render json: @animations
+    end
+
     def show
         @animation = Animation.find(params[:id])
         render json: @animation
