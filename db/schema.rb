@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_013302) do
+ActiveRecord::Schema.define(version: 2021_12_05_235710) do
 
   create_table "animation_frames", force: :cascade do |t|
-    t.integer "order"
+    t.integer "position"
     t.string "data"
     t.integer "animation_id", null: false
     t.datetime "created_at", precision: 6, null: false

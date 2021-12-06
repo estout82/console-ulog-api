@@ -41,6 +41,8 @@ class AnimationTest < ActiveSupport::TestCase
 
     test "secret comparisson should work" do
         # use the has_secure_password to compare secret to 1234
+        animation = animations(:one)
+        assert animation.authenticate_secret("1234")
     end
 
     test "frames relationship works" do

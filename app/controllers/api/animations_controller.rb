@@ -1,9 +1,8 @@
 
+require 'jwt'
+
 class Api::AnimationsController < ApplicationController
-    def test
-        animation = Animation.find_by(slug: "consoleulog")
-        render json: { result: animation.authenticate_secret("11234") }
-    end
+    before_action :require_login!, only: [:update, :destroy]
 
     def index
         @animations = Animation.all
