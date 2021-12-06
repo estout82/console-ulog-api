@@ -1,4 +1,3 @@
-
 require 'jwt'
 
 class Api::AnimationsController < ApplicationController
@@ -6,12 +5,26 @@ class Api::AnimationsController < ApplicationController
 
     def index
         @animations = Animation.all
-        render json: @animations
+        render json: @animations, except: [:secret_digest]
+    end
+
+    def auth
+        @animation = Animation.find_by(slug: params[:animation_id])
+        result = @animation.authenticate_secret(params[:secret])
+
+        # TODO: add secret
+        token = JWT.encode({ slug: params[:animation_id] }, '1234')
+
+        if result
+            render json: { token: token }, status: 200
+        else
+            render json: {}, status: 401
+        end
     end
 
     def show
-        @animation = Animation.find(params[:id])
-        render json: @animation
+        @animation = Animation.find_by(slug: params[:id])
+        render json: @animation, except: [:secret_digest]
     end
 
     def create

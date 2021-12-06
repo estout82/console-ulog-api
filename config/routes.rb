@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :animations do
       resources :frames
+
+      post "/auth", to: "animations#auth"
     end
   end
 end

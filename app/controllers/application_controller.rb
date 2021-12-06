@@ -11,16 +11,18 @@ class ApplicationController < ActionController::API
     def decode_token
         auth_header = request.headers["Authorization"]
 
-        auth_header_split = auth_header.split(' ')
-        
-        if auth_header_split.count > 1
-            token = auth_header_split[1]
+        unless auth_header == nil
+            auth_header_split = auth_header.split(' ')
             
-            decoded_token = JWT.decode token, nil, false
-            
-            if decoded_token
-                # TODO: add some checks for empty array, missing key, etc..
-                @current_animation = decoded_token[0]["animation"]
+            if auth_header_split.count > 1
+                token = auth_header_split[1]
+                
+                decoded_token = JWT.decode token, nil, false
+                
+                if decoded_token
+                    # TODO: add some checks for empty array, missing key, etc..
+                    @current_animation = decoded_token[0]["animation"]
+                end
             end
         end
     end

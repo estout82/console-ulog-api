@@ -1,8 +1,10 @@
 
 class Api::FramesController < ApplicationController
+    #before_action :require_login!, except: [:index]
 
     def index
-        animation = Animation.includes(:frames).find(params[:animation_id])
+        slug = params[:animation_id]
+        animation = Animation.includes(:frames).find_by(slug: slug)
 
         # TODO: order by 'order' attr
         render json: { data: animation.frames }, status: 200
@@ -10,7 +12,8 @@ class Api::FramesController < ApplicationController
 
     # get a single frame
     def show
-        animation_id = params[:animation_id]
+        slug = params[:animation_id]
+        animation_id = Animation.find_by(slug: slug)
         position = params[:id] # TODO: fix the parameter naming
         frame = AnimationFrame.where(animation_id: animation_id, position: position).first
 
@@ -19,7 +22,7 @@ class Api::FramesController < ApplicationController
 
     # create a new frame
     def create
-        new_frame = AnimationFrame.new(animation_params)
+        new_frame = AnimationFrame.new(frame_params)
         new_frame.animation_id = params[:animation_id]
         new_frame.position = get_next_position
 
@@ -37,10 +40,11 @@ class Api::FramesController < ApplicationController
 
     # update a frame
     def update
-        animation = Animation.includes(:frames).find(params[:animation_id])
+        slug = params[:animation_id]
+        animation = Animation.includes(:frames).find_by(slug: slug)
         frame = animation.frames.where(position: params[:id])
         
-        if frame.update(animation_params)
+        if frame.update(frame_params)
             render json: {
                 message: "Updated frame successfully"
             }, status: 200
@@ -49,7 +53,8 @@ class Api::FramesController < ApplicationController
 
     # destroy a frame
     def destroy
-        animation = Animation.includes(:frames).find(params[:animation_id])
+        slug = params[:animation_id]
+        animation = Animation.includes(:frames).find_by(slug: slug)
         frame = animation.frames.where(position: params[:id]).first
         
         if frame.destroy
@@ -66,7 +71,7 @@ class Api::FramesController < ApplicationController
         return frame.position + 1
     end
     
-    def animation_params
-        params.require(:animation).permit(:data)
+    def frame_params
+        params.require(:frame).permit(:data)
     end
 end
