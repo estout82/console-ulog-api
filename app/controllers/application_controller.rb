@@ -17,18 +17,18 @@ class ApplicationController < ActionController::API
             if auth_header_split.count > 1
                 token = auth_header_split[1]
                 
-                decoded_token = JWT.decode token, nil, false
+                decoded_token = JWT.decode(token, '1234', true, algorithm: 'HS256')
                 
                 if decoded_token
                     # TODO: add some checks for empty array, missing key, etc..
-                    @current_animation = decoded_token[0]["animation"]
+                    @current_slug = decoded_token[0]["slug"]
                 end
             end
         end
     end
 
     def require_login!
-        unless @current_animation
+        unless @current_slug
             render json: {  }, status: :unauthorized
         end
     end

@@ -13,7 +13,8 @@ class Api::AnimationsController < ApplicationController
         result = @animation.authenticate_secret(params[:secret])
 
         # TODO: add secret
-        token = JWT.encode({ slug: params[:animation_id] }, '1234')
+        payload = { slug: params[:animation_id] }
+        token = JWT.encode(payload, '1234')
 
         if result
             render json: { token: token }, status: 200
