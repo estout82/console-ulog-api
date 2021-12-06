@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2021_12_05_235710) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "animation_frames", force: :cascade do |t|
     t.integer "position"
     t.string "data"
-    t.integer "animation_id", null: false
+    t.bigint "animation_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["animation_id"], name: "index_animation_frames_on_animation_id"
@@ -32,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_12_05_235710) do
   create_table "messages", force: :cascade do |t|
     t.text "body"
     t.string "color"
-    t.integer "animation_id", null: false
+    t.bigint "animation_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["animation_id"], name: "index_messages_on_animation_id"
