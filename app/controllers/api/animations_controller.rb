@@ -8,6 +8,10 @@ class Api::AnimationsController < ApplicationController
         render json: @animations, except: [:secret_digest]
     end
 
+    def test
+        ActionCable.server.broadcast 'chat', "action cable!"
+    end
+
     def auth
         @animation = Animation.find_by(slug: params[:animation_id])
         result = @animation.authenticate_secret(params[:secret])

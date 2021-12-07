@@ -2,6 +2,7 @@
 class Animation < ApplicationRecord
     has_secure_password :secret
     has_many :frames, class_name: "AnimationFrame"
+    has_many :chats
 
     validates :name, :slug, presence: true
     validates :slug, uniqueness: true

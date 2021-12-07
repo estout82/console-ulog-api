@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  get "/api/animations/test", to: "api/animations#test"
-
   namespace :api do
     resources :animations do
       resources :frames
+      resources :chats, only: [:index, :create]
+
+      get "/test", to: "animations#test"
 
       post "/auth", to: "animations#auth"
     end
   end
+
+  mount ActionCable.server => '/cable'
 end

@@ -21,6 +21,14 @@ frame05 = AnimationFrame.new(position: 5, data: [1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,0
 frame05.animation = animation
 frame05.save
 
+chat01 = Chat.new(body: "hey")
+chat01.animation = animation
+chat01.save
+
+chat02 = Chat.new(body: "sup guy")
+chat02.animation = animation
+chat02.save
+
 message01 = Message.new(body: "Hey there!", color: "#3677d9")
 message01.animation = animation
 message01.save
