@@ -35,7 +35,7 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain.
   config.action_cable.mount_path = '/cable'
-  config.action_cable.url = 'wss://console-ulog-api.ericstoutenburg.com/cable'
+  config.action_cable.url = 'wss://ulog-api.ericstoutenburg.com/cable'
   config.action_cable.allowed_request_origins = [ 
     'https://ulog.ericstoutenburg.com', 
     'http://ulog.ericstoutenburg.com',
