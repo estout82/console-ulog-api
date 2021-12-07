@@ -6,4 +6,4 @@ test:
 
 production:
   adapter: redis
-  url: redis://redistogo:b07258016d1d3110d9e45d9315d46228@pearlfish.redistogo.com:9428/
+  url: <%= ENV.fetch("REDIS_URI") %>
